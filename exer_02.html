@@ -3,11 +3,82 @@
   <head>
     <meta charset="UTF-8" />
     <title>JS Avançat 2</title>
-    <link rel="stylesheet" href="css/estil2.css" />
   </head>
   <body>
     <h1>JS Avançat</h1>
     <h2>Pràctica 2</h2>
-    <script type="text/javascript" src="js/02ex.js"></script>
+    <div id="crono"></div>
+    <script>
+      function retarda(temps) {
+        /*Si es descomenta la segon linea s'executa reject.
+      per a demostrar que passa si la promessa no és compleix
+      */
+        var dobleTemps = temps * 2;
+        //temps = temps * 2;
+        var promesa = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (temps == dobleTemps) {
+              reject('el tiempo no va bien ');
+            } else {
+              resolve('tiempo concluido ');
+            }
+          }, temps);
+        });
+        promesa
+          .then((res) => {
+            //quan es compleix la promesa
+            console.log(res);
+          })
+          .catch((error) => {
+            //quan no es compleix la promesa
+            console.log(error);
+          });
+      }
+      /* let p2 = new Promise((resolver) => {
+        resolver(funcio(num * interval));
+      });*/
+      //console.log('--->' + p2);
+
+      var crono = document.getElementById('crono');
+      async function cuenta(interval, num, element, funcio) {
+        if (interval == null || interval == undefined) {
+          interval = 1000;
+        }
+        if (element == null || element == undefined || element == '') {
+          var element = document.createElement('div');
+          element.setAttribute('id', 'crono2');
+          document.body.appendChild(element);
+        }
+        let p1 = await new Promise((resolver) => {
+          resolver('resuelta en ' + num + ' segundos');
+          let intervalCents = interval / 100;
+          let contador_s = num;
+          let contador_cs = 0;
+
+          var inter = setInterval(function () {
+            if (contador_cs == 0) {
+              contador_cs = 100;
+              contador_s--;
+
+              if (contador_s == 0) {
+                clearInterval(inter);
+                contador_cs = 'fin';
+                console.log(p1);
+              }
+            }
+
+            //element.innerHTML = contador_s + '<br>' + contador_cs;
+            element.innerHTML = contador_s + '<br>' + contador_cs;
+            contador_cs--;
+          }, intervalCents);
+          console.log('--->' + p2);
+        });
+        let p2 = await new Promise((resolver) => {
+          resolver(funcio(num * interval));
+        });
+      }
+
+      cuenta(1000, 5, '', retarda);
+    </script>
   </body>
 </html>
