@@ -7,13 +7,11 @@
   <body>
     <h1>JS Avançat</h1>
     <h2>Pràctica 2</h2>
-    <p id="crono1"></p>
-    <p id="crono2"></p>
+    <p id="crono"></p>
     <script type="module">
       import { retarda, cuenta } from './js/temporitzador.js';
-      var crono1 = document.getElementById('crono1');
-      var crono2 = document.getElementById('crono2');
-      cuenta(5, crono1, retarda);
+      var crono = document.getElementById('crono');
+      cuenta(5, crono, retarda);
     </script>
   </body>
 </html>
